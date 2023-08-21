@@ -7,7 +7,6 @@ from app.main import main
 
 
 def init_yt_downloader(url,
-                       download=True,
                        hd=False,
                        audio_only=False,
                        extractor=None) -> YoutubeDL:
@@ -52,22 +51,24 @@ def init_yt_downloader(url,
 def download_video():
     try:
         data = request.get_json()
+        print(data)
         url: str = data.get('url')
         download: bool = data.get('download', True)
         hd: bool = data.get('hd', False)
         extractor: str = data.get('extractor')
         audio_only: bool = data.get('audio_only', False)
 
-        downloader = init_yt_downloader(url=url, download=download, hd=hd, extractor=extractor, audio_only=audio_only)
+        downloader = init_yt_downloader(url=url, hd=hd, extractor=extractor, audio_only=audio_only)
         with downloader:
-            downloader.download([url])
+            if download:
+                downloader.download([url])
             content_info = downloader.extract_info(url, download=False)
-            content_path = downloader.prepare_filename(content_info)
+            file_path = downloader.prepare_filename(content_info) if download else None
         return jsonify({
             'message': 'success',
             'content_info': content_info,
-            'content_path': content_path,
-             }), 200
+            'file_path': file_path,
+        }), 200
     except Exception as e:
         traceback.print_exc()
         return jsonify(
