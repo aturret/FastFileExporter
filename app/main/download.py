@@ -14,7 +14,7 @@ def init_yt_downloader(url,
     if audio_only:
         ydl_opts = {
             'paths': {
-                'home': config['DOWNLOAD_DIR'],
+                'home': config.get('DOWNLOAD_DIR'),
             },
             'format': 'm4a/bestaudio/best',
             'postprocessors': [{
@@ -29,7 +29,7 @@ def init_yt_downloader(url,
             video_format = 'bestvideo[ext=mp4]+(258/256/140)/best' if hd \
                 else 'bv*[height<=480][ext=mp4]+ba[ext=m4a]/b[height<=480][ext=mp4]/ wv*+ba[ext=m4a]/w'
         elif extractor == 'bilibili':
-            if hd and config['BILIBILI_COOKIE'] is not None:
+            if hd and config.get('BILIBILI_COOKIE', None) is not None:
                 cookies = config['BILIBILI_COOKIE']
                 video_format = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
             else:
