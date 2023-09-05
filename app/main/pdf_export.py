@@ -37,8 +37,7 @@ def pdf_export():
             )
         elif platform.system() == 'Linux':
             html_escaped = shlex.quote(html_string)
-            css_escaped = shlex.quote(css_string)
-            pdf = subprocess.Popen(f"echo {html_escaped} | weasyprint -s <(echo'{css_escaped}') -e utf-8 - -", shell=True,
+            pdf = subprocess.Popen(f"echo {html_escaped} | weasyprint -s pdf_export.css -e utf-8 - -", shell=True,
                                    stdout=subprocess.PIPE).stdout.read()
             file_output = open(output_filename, 'wb')
             file_output.write(pdf)
