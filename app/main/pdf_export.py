@@ -1,4 +1,7 @@
 import os
+import platform
+import subprocess
+import shlex
 
 from flask import current_app, request, jsonify
 from weasyprint import HTML, CSS
@@ -26,11 +29,19 @@ def pdf_export():
         config = current_app.config
         download_dir = config.get('DOWNLOAD_DIR')
         output_filename = os.path.join(download_dir, output_filename)
-        convert_html_to_pdf(
-            html_string=html_string,
-            css_string=css_string,
-            output_filename=output_filename,
-        )
+        if platform.system() == 'Windows':
+            convert_html_to_pdf(
+                html_string=html_string,
+                css_string=css_string,
+                output_filename=output_filename,
+            )
+        elif platform.system() == 'Linux':
+            escaped = shlex.quote(html_string)
+            pdf = subprocess.Popen(f"echo {escaped} | weasyprint -e utf-8 - -", shell=True,
+                                   stdout=subprocess.PIPE).stdout.read()
+            file_output = open(output_filename, 'wb')
+            file_output.write(pdf)
+            file_output.close()
         return jsonify({
             'status': 'success',
             'message': 'pdf export success',
