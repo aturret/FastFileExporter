@@ -47,7 +47,7 @@ def init_yt_downloader(url,
     return downloader
 
 
-@main.route('/download', methods=['POST'])
+@main.route('/videoDownload', methods=['POST'])
 def download_video():
     try:
         data = request.get_json()
