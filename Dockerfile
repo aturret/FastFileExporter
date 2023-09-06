@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3-slim
 LABEL authors="ATurret"
 COPY ./ /app
 WORKDIR /app
