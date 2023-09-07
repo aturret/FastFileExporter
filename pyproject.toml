@@ -12,6 +12,8 @@ flask = "^2.3.2"
 yt-dlp = "^2023.7.6"
 gunicorn = "^21.2.0"
 weasyprint = "^59.0"
+pydub = "^0.25.1"
+openai = "^0.28.0"
 
 
 [build-system]
