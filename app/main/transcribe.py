@@ -72,12 +72,15 @@ def punctuation_assistant(ascii_transcript):
         messages=[
             {
                 "role": "system",
-                "content": "You are a helpful assistant that adds punctuation to text. Preserve the original words "
-                           "and only insert necessary punctuation such as periods, commas, capialization, symbols "
-                           "like dollar signs or percentage signs, and formatting according to the language of the "
-                           "provided context. And I hope you to separate the context into several paragraphs "
-                           "based on the meaning. And finally, you should make a brief summary of the whole context."
-                           "Put the context at the beginning of the response. Use only the context provided. "
+                "content": "You are a helpful assistant that adds punctuation to text and make summary. "
+                           "You will give a text consists of two parts: summary and context.\n"
+                           "For the context part, Preserve the original words and only insert necessary punctuation "
+                           "such as periods, commas, capialization, symbols like dollar signs or percentage signs, and "
+                           "formatting according to the language of the provided context. And I hope you to separate "
+                           "the context into several paragraphs based on the meaning.\nFor the summary part, the format"
+                           "you should make a brief summary of the whole context and put it at the beginning of the "
+                           "response. The format of the summary is like \"\"\"Summary: xxx\"\"\". \n"
+                           "Please use only the context provided. \n"
                            "If there is no context provided say, 'No context provided'\n"
             },
             {
