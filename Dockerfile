@@ -10,6 +10,7 @@ ENV PYTHONUNBUFFERED=1 \
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
+    curl \
     ffmpeg \
     libpango-1.0-0 \
     libpangoft2-1.0-0 \
