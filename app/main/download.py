@@ -6,8 +6,7 @@ from yt_dlp import YoutubeDL
 from app.main import main
 
 
-def init_yt_downloader(url,
-                       hd=False,
+def init_yt_downloader(hd=False,
                        audio_only=False,
                        extractor=None) -> YoutubeDL:
     config = current_app.config
@@ -58,7 +57,7 @@ def download_video():
         extractor: str = data.get('extractor')
         audio_only: bool = data.get('audio_only', False)
 
-        downloader = init_yt_downloader(url=url, hd=hd, extractor=extractor, audio_only=audio_only)
+        downloader = init_yt_downloader(hd=hd, extractor=extractor, audio_only=audio_only)
         with downloader:
             if download:
                 downloader.download([url])
