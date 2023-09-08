@@ -50,5 +50,5 @@ def pdf_export():
     except Exception as e:
         return jsonify({
             'status': 'failed',
-            'message': 'pdf export failed',
+            'message': f'pdf export failed{str(e)}',
         }), 500
