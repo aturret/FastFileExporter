@@ -3,6 +3,7 @@ import platform
 import subprocess
 import shlex
 import traceback
+from pathlib import Path
 
 from flask import current_app, request, jsonify
 from weasyprint import HTML, CSS
@@ -49,7 +50,7 @@ def pdf_export():
             )
         elif platform.system() == 'Linux' and method == 'file':
             print("Linux")
-            html_file_path = shlex.quote(html_file)
+            html_file_path = str(Path(html_file))
             pdf = subprocess.Popen(f"weasyprint -s pdf_export.css -e utf-8 \"{html_file_path}\" -", shell=True,
                                    stdout=subprocess.PIPE).stdout.read()
             file_output = open(output_filename, 'wb')
