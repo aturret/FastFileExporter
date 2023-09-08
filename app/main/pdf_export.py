@@ -49,7 +49,7 @@ def pdf_export():
             )
         elif platform.system() == 'Linux' and method == 'file':
             print("Linux")
-            pdf = subprocess.Popen(f"weasyprint -s pdf_export.css -e utf-8 {html_file} -", shell=True,
+            pdf = subprocess.Popen(f"weasyprint -s pdf_export.css -e utf-8 '{html_file}' -", shell=True,
                                    stdout=subprocess.PIPE).stdout.read()
             file_output = open(output_filename, 'wb')
             file_output.write(pdf)
