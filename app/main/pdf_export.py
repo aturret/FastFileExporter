@@ -2,6 +2,7 @@ import os
 import platform
 import subprocess
 import shlex
+import traceback
 
 from flask import current_app, request, jsonify
 from weasyprint import HTML, CSS
@@ -11,33 +12,44 @@ from app.main import main
 
 
 def convert_html_to_pdf(
-    html_string: str, css_string: str, output_filename: str
+    output_filename: str, html_string: str = None, html_file: str = None
 ) -> None:
-    font_config = FontConfiguration()
-    css_item = CSS(string=css_string, font_config=font_config)
-    html_item = HTML(string=html_string)
-    pdf_obj = html_item.write_pdf(output_filename, stylesheets=[css_item])
+    try:
+        font_config = FontConfiguration()
+        css_item = CSS(filename="pdf_export.css", font_config=font_config)
+        if html_file:
+            html_item = HTML(filename=html_file, encoding="utf-8")
+        elif html_string:
+            html_item = HTML(string=html_string)
+        html_item.write_pdf(output_filename, stylesheets=[css_item])
+    except Exception as e:
+        traceback.print_exc()
+        raise e
 
 
 @main.route('/pdfExport', methods=['POST'])
 def pdf_export():
     try:
         data = request.get_json()
-        html_string = data.get('html_string')
-        css_string = data.get('css_string')
-        output_filename = data.get('output_filename')
+        print(f"data: {data}")
+        method = data.get('method')
+        html_string = data.get('html_string', None)
+        html_file = data.get('html_file', None)
         config = current_app.config
         download_dir = config.get('DOWNLOAD_DIR')
+        output_filename = data.get('output_filename')
         output_filename = os.path.join(download_dir, output_filename)
+        print(f"output_filename: {output_filename}")
         if platform.system() == 'Windows':
+            print("Windows")
             convert_html_to_pdf(
                 html_string=html_string,
-                css_string=css_string,
+                html_file=html_file,
                 output_filename=output_filename,
             )
-        elif platform.system() == 'Linux':
-            html_escaped = shlex.quote(html_string)
-            pdf = subprocess.Popen(f"echo {html_escaped} | weasyprint -s pdf_export.css -e utf-8 - -", shell=True,
+        elif platform.system() == 'Linux' and method == 'file':
+            print("Linux")
+            pdf = subprocess.Popen(f"weasyprint -s pdf_export.css -e utf-8 {html_file} -", shell=True,
                                    stdout=subprocess.PIPE).stdout.read()
             file_output = open(output_filename, 'wb')
             file_output.write(pdf)
