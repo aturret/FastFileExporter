@@ -11,6 +11,7 @@ from weasyprint.text.fonts import FontConfiguration
 
 from app.main import main
 
+config = current_app.config
 
 def convert_html_to_pdf(
     output_filename: str, html_string: str = None, html_file: str = None
@@ -36,26 +37,29 @@ def pdf_export():
         method = data.get('method')
         html_string = data.get('html_string', None)
         html_file = data.get('html_file', None)
-        config = current_app.config
         download_dir = config.get('DOWNLOAD_DIR')
         output_filename = data.get('output_filename')
-        output_filename = os.path.join(download_dir, output_filename)
+        output_filename_with_dir = os.path.join(download_dir, output_filename)
         print(f"output_filename: {output_filename}")
         if platform.system() == 'Windows':
             print("Windows")
             convert_html_to_pdf(
                 html_string=html_string,
                 html_file=html_file,
-                output_filename=output_filename,
+                output_filename=output_filename_with_dir,
             )
         elif platform.system() == 'Linux' and method == 'file':
             print("Linux")
             html_file_path = str(Path(html_file))
             pdf = subprocess.Popen(f"weasyprint -s pdf_export.css -e utf-8 \"{html_file_path}\" -", shell=True,
                                    stdout=subprocess.PIPE).stdout.read()
-            file_output = open(output_filename, 'wb')
+            file_output = open(output_filename_with_dir, 'wb')
             file_output.write(pdf)
             file_output.close()
+        if config.get('LOCAL_MODE', True):
+            output_filename = output_filename_with_dir
+        else:
+            output_filename = config.get('BASE_URL') + '/fileDownload/' + output_filename
         return jsonify({
             'status': 'success',
             'message': 'pdf export success',
