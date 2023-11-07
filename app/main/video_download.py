@@ -5,11 +5,11 @@ from yt_dlp import YoutubeDL
 
 from app.main import main
 
+config = current_app.config
 
 def init_yt_downloader(hd=False,
                        audio_only=False,
                        extractor=None) -> YoutubeDL:
-    config = current_app.config
     if audio_only:
         ydl_opts = {
             'paths': {
@@ -62,11 +62,19 @@ def download_video():
             if download:
                 downloader.download([url])
             content_info = downloader.extract_info(url, download=False)
-            file_path = downloader.prepare_filename(content_info) if download else None
+            if download:
+                file_path = downloader.prepare_filename(content_info)
+                # if the file name is too long, we will use the short version
+                if len(file_path) > 255:
+                    pure_filename = file_path.split('/')[-1].split('.')[0]
+                    file_path = file_path.replace(pure_filename, pure_filename[:100])
+                file_path_output = file_path.split('/')[-1] if config.get('LOCAL_MODE', True) \
+                    else config.get('BASE_URL') + '/fileDownload' + file_path
+
         return jsonify({
             'message': 'success',
             'content_info': content_info,
-            'file_path': file_path,
+            'file_path': file_path_output,
         }), 200
     except Exception as e:
         traceback.print_exc()
