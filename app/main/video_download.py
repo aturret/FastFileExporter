@@ -69,7 +69,8 @@ def download_video():
                 if len(file_path) > 255:
                     pure_filename = file_path.split('/')[-1].split('.')[0]
                     file_path = file_path.replace(pure_filename, pure_filename[:100])
-                file_path_output = file_path.split('/')[-1] if config.get('LOCAL_MODE', True) \
+                local_mode = config.get('LOCAL_MODE', True)
+                file_path_output = file_path.split('/')[-1] if local_mode \
                     else config.get('BASE_URL') + '/fileDownload' + file_path
 
         return jsonify({
