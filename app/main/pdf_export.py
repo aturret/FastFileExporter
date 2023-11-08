@@ -11,7 +11,7 @@ from weasyprint.text.fonts import FontConfiguration
 
 from app.main import main
 
-config = current_app.config
+
 
 def convert_html_to_pdf(
     output_filename: str, html_string: str = None, html_file: str = None
@@ -32,6 +32,7 @@ def convert_html_to_pdf(
 @main.route('/pdfExport', methods=['POST'])
 def pdf_export():
     try:
+        config = current_app.config
         data = request.get_json()
         print(f"data: {data}")
         method = data.get('method')

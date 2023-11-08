@@ -5,11 +5,11 @@ from yt_dlp import YoutubeDL
 
 from app.main import main
 
-config = current_app.config
 
 def init_yt_downloader(hd=False,
                        audio_only=False,
                        extractor=None) -> YoutubeDL:
+    config = current_app.config
     if audio_only:
         ydl_opts = {
             'paths': {
@@ -49,6 +49,7 @@ def init_yt_downloader(hd=False,
 @main.route('/videoDownload', methods=['POST'])
 def download_video():
     try:
+        config = current_app.config
         data = request.get_json()
         print(data)
         url: str = data.get('url')
