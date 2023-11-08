@@ -4,6 +4,7 @@ from flask import current_app, request, jsonify
 from yt_dlp import YoutubeDL
 
 from app.main import main
+from app.utils.parse import filename_reduction
 
 
 def init_yt_downloader(hd=False,
@@ -66,9 +67,7 @@ def download_video():
             if download:
                 file_path = downloader.prepare_filename(content_info)
                 # if the file name is too long, we will use the short version
-                if len(file_path) > 255:
-                    pure_filename = file_path.split('/')[-1].split('.')[0]
-                    file_path = file_path.replace(pure_filename, pure_filename[:100])
+                file_path = filename_reduction(file_path)
                 file_path_output = file_path.split('/')[-1] if config.get('LOCAL_MODE', True) \
                     else config.get('BASE_URL') + '/fileDownload' + file_path
 
