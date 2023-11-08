@@ -5,7 +5,7 @@ env = os.environ
 
 
 class Config:
-    LOCAL_MODE = env.get("LOCAL_MODE", False)
+    LOCAL_MODE = env.get("LOCAL_MODE", True)
     BASE_URL = env.get("BASE_URL", "localhost:4000")
 
     @staticmethod

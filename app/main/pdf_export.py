@@ -57,8 +57,7 @@ def pdf_export():
             file_output = open(output_filename_with_dir, 'wb')
             file_output.write(pdf)
             file_output.close()
-        local_mode = config.get('LOCAL_MODE', True)
-        if local_mode:
+        if config.get('LOCAL_MODE', True):
             output_filename = output_filename_with_dir
         else:
             output_filename = config.get('BASE_URL') + '/fileDownload/' + output_filename
