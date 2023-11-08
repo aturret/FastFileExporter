@@ -1,4 +1,4 @@
-FROM python:3-slim
+FROM python:3.11.6-slim
 LABEL authors="ATurret"
 COPY ./ /app
 WORKDIR /app
@@ -21,6 +21,7 @@ RUN apt-get update && \
     fonts-wqy-zenhei \
     fonts-noto-cjk \
     fonts-noto-cjk-extra && \
+    pip install --upgrade pip && \
     pip install weasyprint
 RUN curl -sSL https://install.python-poetry.org | python &&  \
     poetry install --no-dev
