@@ -66,8 +66,8 @@ def download_video():
             content_info = downloader.extract_info(url, download=False)
             if download:
                 file_path = downloader.prepare_filename(content_info)
-                # if the file name is too long, we will use the short version
-                file_path = filename_reduction(file_path)
+                # if len(file_path) > 150:
+                #     file_path = filename_reduction(file_path)
                 file_path_output = file_path.split('/')[-1] if config.get('LOCAL_MODE', True) \
                     else config.get('BASE_URL') + '/fileDownload' + file_path
 
