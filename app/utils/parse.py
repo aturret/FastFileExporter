@@ -8,5 +8,5 @@ def filename_reduction(filename: str) -> str:
     """
     if len(filename) > 100:
         pure_filename = filename.split('/')[-1].split('.')[0]
-        file_path = filename.replace(pure_filename, pure_filename[:100])
+        file_path = filename.replace(pure_filename, pure_filename[100:])
         return file_path
