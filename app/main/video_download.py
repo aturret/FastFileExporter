@@ -68,7 +68,7 @@ def download_video():
                 file_path = downloader.prepare_filename(content_info)
                 # if len(file_path) > 150:
                 #     file_path = filename_reduction(file_path)
-                file_path_output = file_path.split('/')[-1] if config.get('LOCAL_MODE', True) \
+                file_path_output = file_path if config.get('LOCAL_MODE', True) \
                     else config.get('BASE_URL') + '/fileDownload' + file_path
 
         return jsonify({
