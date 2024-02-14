@@ -39,7 +39,7 @@ def init_yt_downloader(hd=False,
                 'home': config['DOWNLOAD_DIR'],
             },
             'outtmpl': {
-                'default': '%(title).100s-%(id)s.%(ext)s',
+                'default': '%(title).10s-%(id)s.%(ext)s',
             },
             'format': video_format,
         }
