@@ -20,8 +20,8 @@ RUN apt-get update && \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
     fonts-noto-cjk \
-    fonts-noto-cjk-extra && \
-    pip install weasyprint
+    fonts-noto-cjk-extra
+#    pip install weasyprint
 RUN curl -sSL https://install.python-poetry.org | python &&  \
     poetry install --no-dev
 CMD poetry run gunicorn -w 1 -b 0.0.0.0:$PORT wsgi:app
