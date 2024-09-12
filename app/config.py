@@ -7,6 +7,8 @@ env = os.environ
 class Config:
     LOCAL_MODE = env.get("LOCAL_MODE", True)
     BASE_URL = env.get("BASE_URL", "localhost:4000")
+    PROXY_MODE = env.get("PROXY_MODE", False).lower() in ['true', '1', 't', 'y', 'yes']
+    PROXY_URL = env.get("PROXY_URL", "http://localhost:4000")
 
     @staticmethod
     def init_app(app):

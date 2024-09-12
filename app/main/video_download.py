@@ -43,6 +43,10 @@ def init_yt_downloader(hd=False,
             },
             'format': video_format,
         }
+
+    if config.get('PROXY_MODE', False):
+        ydl_opts['proxy'] = config.get('PROXY_URL', 'http://localhost:4000')
+
     downloader = YoutubeDL(ydl_opts)
     return downloader
 
