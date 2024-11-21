@@ -11,7 +11,7 @@ python = "^3.11"
 flask = "^2.3.2"
 yt-dlp = "^2024.8.6"
 gunicorn = "^21.2.0"
-weasyprint = "^62.3"
+weasyprint = "^63.0"
 pydub = "^0.25.1"
 openai = "^0.28.0"
 
