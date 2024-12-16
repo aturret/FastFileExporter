@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 flask = "^2.3.2"
-yt-dlp = { git = "https://github.com/yt-dlp/yt-dlp.git", branch = "master" }
+yt-dlp = "^2024.12.13"
 gunicorn = "^21.2.0"
 weasyprint = "^63.0"
 pydub = "^0.25.1"
