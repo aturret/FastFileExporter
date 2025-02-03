@@ -13,7 +13,7 @@ yt-dlp = "^2025.1.26"
 gunicorn = "^23.0.0"
 weasyprint = "^64.0"
 pydub = "^0.25.1"
-openai = "^1.60.1"
+openai = "^1.61.0"
 
 
 [build-system]
