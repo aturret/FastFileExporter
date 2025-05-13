@@ -11,7 +11,8 @@ COOKIE_FILE_PATH = '/app/conf/cookies.txt'
 
 def init_yt_downloader(hd=False,
                        audio_only=False,
-                       extractor=None) -> YoutubeDL:
+                       extractor=None,
+                       no_proxy=False) -> YoutubeDL:
     config = current_app.config
     if audio_only:
         ydl_opts = {
@@ -45,11 +46,10 @@ def init_yt_downloader(hd=False,
             },
             'format': video_format,
         }
+    if config.get('YOUTUBE_COOKIE', False) and extractor == 'youtube':
+        ydl_opts['cookiefile'] = COOKIE_FILE_PATH    
 
-    if config.get('YOUTUBE_COOKIE', False):
-        ydl_opts['cookiefile'] = COOKIE_FILE_PATH
-
-    if config.get('PROXY_MODE', False):
+    if config.get('PROXY_MODE', False) and not no_proxy:
         ydl_opts['proxy'] = config.get('PROXY_URL', 'http://localhost:4000')
 
     downloader = YoutubeDL(ydl_opts)
