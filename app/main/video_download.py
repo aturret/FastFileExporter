@@ -7,6 +7,8 @@ from app.main import main
 from app.utils.parse import filename_reduction
 
 
+COOKIE_FILE_PATH = '/app/conf/cookies.txt'
+
 def init_yt_downloader(hd=False,
                        audio_only=False,
                        extractor=None) -> YoutubeDL:
@@ -43,6 +45,9 @@ def init_yt_downloader(hd=False,
             },
             'format': video_format,
         }
+
+    if config.get('YOUTUBE_COOKIE', False):
+        ydl_opts['cookiefile'] = COOKIE_FILE_PATH
 
     if config.get('PROXY_MODE', False):
         ydl_opts['proxy'] = config.get('PROXY_URL', 'http://localhost:4000')
