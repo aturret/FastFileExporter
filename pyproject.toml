@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.11"
 flask = "^3.1.0"
-yt-dlp = "^2025.06.25"
+yt-dlp = "^2025.07.21"
 gunicorn = "^23.0.0"
 weasyprint = "^65.1"
 pydub = "^0.25.1"

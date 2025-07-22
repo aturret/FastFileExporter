@@ -12,9 +12,8 @@ from weasyprint.text.fonts import FontConfiguration
 from app.main import main
 
 
-
 def convert_html_to_pdf(
-    output_filename: str, html_string: str = None, html_file: str = None
+        output_filename: str, html_string: str = None, html_file: str = None
 ) -> None:
     try:
         font_config = FontConfiguration()
@@ -40,7 +39,7 @@ def pdf_export():
         html_file = data.get('html_file', None)
         download_dir = config.get('DOWNLOAD_DIR')
         output_filename = data.get('output_filename')
-        output_filename_with_dir = os.path.join(download_dir, output_filename)
+        output_filename_with_dir = str(os.path.join(download_dir, output_filename))
         print(f"output_filename: {output_filename}")
         if platform.system() == 'Windows':
             print("Windows")
