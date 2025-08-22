@@ -8,12 +8,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-flask = "^3.1.0"
+flask = "^3.1.2"
 yt-dlp = "^2025.08.20"
 gunicorn = "^23.0.0"
-weasyprint = "^65.1"
+weasyprint = "^66.0"
 pydub = "^0.25.1"
-openai = "^1.76.2"
+openai = "^1.101.0"
 
 
 [build-system]
