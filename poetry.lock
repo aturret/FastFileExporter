@@ -1222,19 +1222,19 @@ watchdog = ["watchdog (>=2.3)"]
 
 [[package]]
 name = "yt-dlp"
-version = "2025.7.21"
+version = "2025.8.20"
 description = "A feature-rich command-line audio/video downloader"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "yt_dlp-2025.7.21-py3-none-any.whl", hash = "sha256:d7aa2b53f9b2f35453346360f41811a0dad1e956e70b35a4ae95039d4d815d15"},
-    {file = "yt_dlp-2025.7.21.tar.gz", hash = "sha256:46fbb53eab1afbe184c45b4c17e9a6eba614be680e4c09de58b782629d0d7f43"},
+    {file = "yt_dlp-2025.8.20-py3-none-any.whl", hash = "sha256:073c97e2a3f9cd0fa6a76142c4ef46ca62b2575c37eaf80d8c3718fd6f3277eb"},
+    {file = "yt_dlp-2025.8.20.tar.gz", hash = "sha256:da873bcf424177ab5c3b701fa94ea4cdac17bf3aec5ef37b91f530c90def7bcf"},
 ]
 
 [package.extras]
 build = ["build", "hatchling", "pip", "setuptools (>=71.0.2,<81)", "wheel"]
-curl-cffi = ["curl-cffi (>=0.5.10,<0.6.dev0 || ==0.10.*)"]
-default = ["brotli", "brotlicffi", "certifi", "mutagen", "pycryptodomex", "requests (>=2.32.2,<3)", "urllib3 (>=1.26.17,<3)", "websockets (>=13.0)"]
+curl-cffi = ["curl-cffi (>=0.5.10,<0.6.dev0 || >=0.10.dev0,<0.14)"]
+default = ["brotli", "brotlicffi", "certifi", "mutagen", "pycryptodomex", "requests (>=2.32.2,<3)", "urllib3 (>=2.0.2,<3)", "websockets (>=13.0)"]
 dev = ["autopep8 (>=2.0,<3.0)", "pre-commit", "pytest (>=8.1,<9.0)", "pytest-rerunfailures (>=14.0,<15.0)", "ruff (>=0.12.0,<0.13.0)"]
 pyinstaller = ["pyinstaller (>=6.13.0)"]
 secretstorage = ["cffi", "secretstorage"]
@@ -1327,4 +1327,4 @@ test = ["pytest"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11"
-content-hash = "d890a66575b8427e172fcdedecb2a30d62f2a0921194df341a17c3c7a7a29b57"
+content-hash = "42e8490cb1f617af34b6414b66a2021261c07544ad62612ae5818e215f6bf062"
