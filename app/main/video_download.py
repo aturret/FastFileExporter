@@ -45,6 +45,7 @@ def init_yt_downloader(hd=False,
                 'default': '%(title).10s-%(id)s.%(ext)s',
             },
             'format': video_format,
+            'referer': 'https://www.bilibili.com/',
         }
     if config.get('YOUTUBE_COOKIE') and extractor == 'youtube':
         print('Using cookies for youtube')
