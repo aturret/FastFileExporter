@@ -33,6 +33,7 @@ class Config:
     PROXY_MODE = get_bool(env.get("PROXY_MODE", 'false'), False)
     PROXY_URL = env.get("PROXY_URL", "http://localhost:4000")
     YOUTUBE_COOKIE = get_bool(env.get("YOUTUBE_COOKIE", 'false'), False)
+    BILIBILI_COOKIE = get_bool(env.get("BILIBILI_COOKIE", 'false'), False)
 
     @staticmethod
     def init_app(app):

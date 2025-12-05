@@ -14,6 +14,7 @@ def init_yt_downloader(hd=False,
                        extractor=None,
                        no_proxy=False) -> YoutubeDL:
     config = current_app.config
+    # audio only
     if audio_only:
         ydl_opts = {
             'paths': {
@@ -25,6 +26,7 @@ def init_yt_downloader(hd=False,
                 'preferredcodec': 'm4a',
             }]
         }
+    # video download
     else:
         if extractor is None:
             raise ValueError('extractor cannot be None')
@@ -37,6 +39,7 @@ def init_yt_downloader(hd=False,
                 video_format = 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best'
             else:
                 video_format = 'bv*[height<=480]+ba/b[height<=480] / wv*+ba/w'
+
         ydl_opts = {
             'paths': {
                 'home': config['DOWNLOAD_DIR'],
@@ -49,6 +52,10 @@ def init_yt_downloader(hd=False,
         }
     if config.get('YOUTUBE_COOKIE') and extractor == 'youtube':
         print('Using cookies for youtube')
+        ydl_opts['cookiefile'] = COOKIE_FILE_PATH
+
+    if config.get('BILIBILI_COOKIE') and extractor == 'bilibili':
+        print('Using cookies for bilibili')
         ydl_opts['cookiefile'] = COOKIE_FILE_PATH
 
     if config.get('PROXY_MODE', False) and not no_proxy:
