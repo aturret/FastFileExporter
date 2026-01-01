@@ -9,11 +9,11 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.11"
 flask = "^3.1.0"
-yt-dlp = "^2025.11.12"
+yt-dlp = "^2025.12.8"
 gunicorn = "^23.0.0"
-weasyprint = "^65.1"
+weasyprint = "^67.0"
 pydub = "^0.25.1"
-openai = "^1.76.2"
+openai = "^2.14.0"
 
 
 [build-system]
