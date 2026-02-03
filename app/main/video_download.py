@@ -12,6 +12,8 @@ COOKIE_FILE_PATH = os.path.join(PROJECT_ROOT, 'conf', 'cookies.txt')
 
 
 def get_video_orientation(content_info: dict) -> str:
+    if not content_info.get("formats"):
+        return 'vertical'
     one_video_info = content_info['formats'][0]
     if one_video_info.get('aspect_ratio', 0.56) < 1:
         return 'vertical' # default as vertical

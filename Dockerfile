@@ -6,9 +6,10 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_VERSION=1.5.1 \
     POETRY_HOME="/opt/poetry" \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
-    POETRY_NO_INTERACTION=1
+    POETRY_NO_INTERACTION=1 \
+    DENO_INSTALL="/root/.deno"
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:${DENO_INSTALL}/bin:$PATH"
-ENV DENO_INSTALL="/root/.deno"
+
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
     curl \
