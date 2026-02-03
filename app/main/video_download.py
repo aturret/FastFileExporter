@@ -11,12 +11,16 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 COOKIE_FILE_PATH = os.path.join(PROJECT_ROOT, 'conf', 'cookies.txt')
 
 
-def get_video_orientation(content_info: dict) -> str:
+def get_video_orientation(content_info: dict, extractor: str) -> str:
+    # Only apply orientation detection for YouTube videos
+    if extractor != 'youtube':
+        return 'horizontal'  # Default for non-YouTube videos
+
     if not content_info.get("formats"):
         return 'vertical'
     one_video_info = content_info['formats'][0]
     if one_video_info.get('aspect_ratio', 0.56) < 1:
-        return 'vertical' # default as vertical
+        return 'vertical'  # default as vertical
     return 'horizontal'
 
 
@@ -139,7 +143,7 @@ def download_video():
             content_info = extractor_dl.extract_info(url, download=False)
 
         # Determine video orientation
-        orientation = get_video_orientation(content_info)
+        orientation = get_video_orientation(content_info, extractor)
         print(f'Video orientation: {orientation}')
 
         # Phase 2: Download with appropriate format based on orientation
