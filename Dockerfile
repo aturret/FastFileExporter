@@ -7,10 +7,12 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_HOME="/opt/poetry" \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1
-ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:${DENO_INSTALL}/bin:$PATH"
+ENV DENO_INSTALL="/root/.deno"
 RUN apt-get update && \
     apt-get install --no-install-recommends -y \
     curl \
+    unzip \
     ffmpeg \
     libpango-1.0-0 \
     libpangoft2-1.0-0 \
@@ -20,7 +22,8 @@ RUN apt-get update && \
     fonts-wqy-microhei \
     fonts-wqy-zenhei \
     fonts-noto-cjk \
-    fonts-noto-cjk-extra
+    fonts-noto-cjk-extra \
+    && curl -fsSL https://deno.land/install.sh | sh
 RUN curl -sSL https://install.python-poetry.org | python &&  \
     poetry install --no-dev
 CMD poetry run gunicorn -w 1 -b 0.0.0.0:$PORT wsgi:app
