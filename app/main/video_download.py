@@ -48,6 +48,7 @@ def init_yt_downloader(hd=False,
         # 'extractor_args': {'youtube': {'player_client': ['ios', 'web', 'mweb']}},
         'allow_remote_ejs': 'github',
         'allow_remote_components': 'ejs:github',
+        'merge_output_format': 'mp4'
     }
 
     # For extraction only - minimal options, no downloading
